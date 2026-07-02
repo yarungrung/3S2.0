@@ -2,17 +2,21 @@
 import os
 from pathlib import Path
 from functools import lru_cache
+import streamlit as st
+
+# 這是 Streamlit 官方建議的讀取方式
+api_key = st.secrets.get("CWA_API_KEY")
 
 # ==========================================
 # 1. API 金鑰 (從環境變數讀取)
 # ==========================================
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
-WEATHER_API_KEY = os.environ.get("WEATHER_API_KEY") or os.environ.get("CWA_API_KEY")
-MOENV_API_KEY = os.environ.get("MOENV_API_KEY")
+GEMINI_API_KEY = st.secrets.get("GEMINI_API_KEY")
+WEATHER_API_KEY = st.secrets.get("WEATHER_API_KEY") or os.environ.get("CWA_API_KEY")
+MOENV_API_KEY = st.secrets.get("MOENV_API_KEY")
 
 # 交通部 TDX API 金鑰 (備用)
-TDX_APP_ID = os.environ.get("TDX_APP_ID")
-TDX_APP_KEY = os.environ.get("TDX_APP_KEY")
+TDX_APP_ID = st.secrets.get("TDX_APP_ID")
+TDX_APP_KEY = st.secrets.get("TDX_APP_KEY")
 
 # 安全防護警告：核心大腦金鑰若遺失，以 warning 提醒，不中斷啟動以利離線測試與部屬
 if not GEMINI_API_KEY:
@@ -21,7 +25,7 @@ if not GEMINI_API_KEY:
 # ==========================================
 # 2. 模型與參數設定
 # ==========================================
-GEMINI_MODEL_NAME = os.environ.get("GEMINI_MODEL", "gemini-3.5-flash")
+GEMINI_MODEL_NAME = st.secrets.get("GEMINI_MODEL", "gemini-3.5-flash")
 
 # ==========================================
 # 3. 專案路徑設定 (動態定位，避免跨平台路徑錯誤)
