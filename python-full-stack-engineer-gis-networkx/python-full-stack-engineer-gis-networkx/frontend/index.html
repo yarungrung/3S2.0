@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>同理心智慧路線推薦</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="control-panel">
+        <h1>同理心智慧路線推薦</h1>
+        <p class="notice">目前服務範圍限臺北市內，起點與終點都必須位於臺北市範圍內。</p>
+
+        <div class="address-block">
+          <label>起點地址
+            <div class="search-row">
+              <input id="origin-address" placeholder="例如：台北車站、信義區市府路1號" />
+              <button class="secondary-btn" id="origin-search" type="button">搜尋</button>
+            </div>
+          </label>
+          <select id="origin-results" class="result-select" hidden></select>
+          <input id="origin" type="hidden" value="25.047800,121.531900" />
+        </div>
+
+        <div class="address-block">
+          <label>終點地址
+            <div class="search-row">
+              <input id="destination-address" placeholder="例如：台北101、松山車站" />
+              <button class="secondary-btn" id="destination-search" type="button">搜尋</button>
+            </div>
+          </label>
+          <select id="destination-results" class="result-select" hidden></select>
+          <input id="destination" type="hidden" value="25.033000,121.565400" />
+        </div>
+
+        <div class="grid three">
+          <label>性別
+            <select id="gender">
+              <option>女性</option>
+              <option>男性</option>
+            </select>
+          </label>
+          <label>年齡 <input id="age" type="number" min="0" max="120" value="28" /></label>
+          <label>體重
+            <input id="weight" type="number" min="1" max="300" value="50" />
+          </label>
+        </div>
+        <label class="inline-check">
+          <input id="private-weight" type="checkbox" />
+          不便透露體重，使用預設 60kg 計算
+        </label>
+
+        <fieldset>
+          <legend>交通工具</legend>
+          <label><input type="checkbox" name="vehicles" value="walking" checked />步行</label>
+          <label><input type="checkbox" name="vehicles" value="mrt" checked />捷運</label>
+          <label><input type="checkbox" name="vehicles" value="bus" checked />公車</label>
+          <label><input type="checkbox" name="vehicles" value="train" />台鐵</label>
+          <label><input type="checkbox" name="vehicles" value="ubike" checked />YouBike</label>
+          <label><input type="checkbox" name="vehicles" value="taxi" />計程車</label>
+          <label><input type="checkbox" name="vehicles" value="car" />汽車</label>
+          <label><input type="checkbox" name="vehicles" value="scooter" />機車</label>
+        </fieldset>
+
+        <label>自由輸入
+          <textarea id="complaint" rows="3">今天腳不舒服，不想走太久，希望舒服一點。</textarea>
+        </label>
+        <button id="recommend-btn">開始推薦</button>
+        <p id="status"></p>
+      </section>
+
+      <section class="map-panel">
+        <div id="map"></div>
+        <section class="results">
+          <h2>推薦結果</h2>
+          <p id="reasoning"></p>
+          <div id="routes"></div>
+        </section>
+      </section>
+    </main>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="/static/script.js"></script>
+  </body>
+</html>

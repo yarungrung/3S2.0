@@ -1,0 +1,13 @@
+fastapi
+uvicorn[standard]
+pydantic
+python-dotenv
+requests
+google-genai
+networkx
+osmnx
+geopandas
+pandas
+numpy
+scipy
+shapely

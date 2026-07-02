@@ -1,0 +1,22 @@
+# Python files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Local settings & environment keys
+.env
+.flaskenv
+
+# Local Streamlit config and caches
+.streamlit/
+.ipynb_checkpoints/
+backend/data/cache/
+
+# Large uncompressed GraphML files (ignore raw .graphml over 100MB)
+*.graphml
+!*.graphml.gz
+
+# IDE configurations
+.vscode/
+.idea/
