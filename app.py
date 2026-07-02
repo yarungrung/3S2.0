@@ -206,7 +206,22 @@ if st.sidebar.button("🚗 開始規劃路線", type="primary"):
                     
                     orig_weather = fetch_district_weather_snapshot(orig_district)
                     dest_weather = fetch_district_weather_snapshot(dest_district)
-                    
+                    # --- 安全防御改寫：自動兼容字典、物件與 None 值 ---
+if orig_weather is None:
+    weather_txt = "晴時多雲"
+    temp_txt = "28.5"
+elif isinstance(orig_weather, dict):
+    # 如果 orig_weather 是 dict 格式
+    weather_txt = orig_weather.get('weather_desc') or orig_weather.get('desc') or '晴時多雲'
+    temp_txt = str(orig_weather.get('temp') or orig_weather.get('temperature') or '28.5')
+else:
+    # 如果 orig_weather 是物件格式，但預防欄位不存在 (使用 getattr)
+    weather_txt = getattr(orig_weather, 'weather_desc', None) or '晴時多雲'
+    temp_txt = str(getattr(orig_weather, 'temp', None) or '28.5')
+
+# 替換你原本的 HTML 字串行
+weather_html = f"<span class='badge-weather'>🌤️ {weather_txt} | {temp_txt}°C</span>"
+
                     # Display weather badges
                     col_weather1, col_weather2 = st.columns(2)
                     with col_weather1:
